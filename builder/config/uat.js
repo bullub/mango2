@@ -1,13 +1,16 @@
-import _ from 'lodash';
+import { merge } from 'lodash';
+import { resolve } from 'path';
 
 import baseConfig from './base';
 
 const envConfig = {
   mode: 'production',
   resolve: {
-    // 设置配置模块，引用当前环境指定的配置
-    config$: resolve(__dirname, `../../src/config/uat.js`)
+    alias: {
+      // 设置配置模块，引用当前环境指定的配置
+      config$: resolve(__dirname, `../../src/config/uat.js`)
+    }
   }
 };
 
-export default _.merge(baseConfig, envConfig);
+export default merge(baseConfig, envConfig);

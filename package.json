@@ -8,7 +8,10 @@
   "license": "Private",
   "private": true,
   "scripts": {
-    "dev": "./node_modules/.bin/webpack --env=dev --display-error-details"
+    "dev": "./node_modules/.bin/webpack --access=dev --display-error-details",
+    "stg": "./node_modules/.bin/webpack --access=stg --display-error-details",
+    "uat": "./node_modules/.bin/webpack --access=uat --display-error-details",
+    "prd": "./node_modules/.bin/webpack --access=prd --display-error-details"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
