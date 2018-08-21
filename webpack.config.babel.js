@@ -7,6 +7,6 @@ const accessEnvironment = getAccessEnvironment();
 
 const envConfig = require(`./builder/config/${accessEnvironment}`);
 
-console.log(JSON.stringify(envConfig, null, '  '));
+// console.log(JSON.stringify(envConfig, null, '  '));
 
 export default envConfig;

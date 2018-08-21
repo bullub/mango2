@@ -1,6 +1,4 @@
 import { resolve } from 'path';
-import { getAccessEnvironment } from "../utils/environment";
-
 
 export default {
   context: resolve(__dirname, '../../src'),
@@ -11,21 +9,24 @@ export default {
     publicPath: ''
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['*', '.js', '.json'],
     alias: {
-      config$: `config/${getAccessEnvironment()}.js`,
-      pages: resolve(__dirname, '../../src/pages')
+      // 页面开始的地方
+      pages: resolve(__dirname, '../../src/pages'),
+      // 公共资源的位置
+      assets: resolve(__dirname, '../../src/assets')
     }
-    // modules: ['*', 'node_modules']
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
       }
     ]
   }

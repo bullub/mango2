@@ -1,8 +1,8 @@
-// import config from 'config';
+import config from 'config';
 
 
 function consoleLog() {
-  console.log(111);
+  console.log(config);
 }
 
 consoleLog();
