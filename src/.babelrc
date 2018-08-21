@@ -1,0 +1,22 @@
+{
+    "plugins": [
+      ["@babel/plugin-transform-runtime", {
+        "helpers": false,
+        "regenerator": true
+      }]
+    ],
+    "presets": [
+      ["@babel/preset-env", {
+        "modules": false,
+        "loose": true,
+        "targets": {
+          "browsers": [
+            "iOS >= 7",
+            "Android >= 4.1"
+          ]
+        },
+        "debug": true
+      }]
+
+    ]
+  }

@@ -1,0 +1,12 @@
+[*]
+end_of_line = lf
+trim_trailing_whitespace = true
+
+[*.{js,html,css,less,sass,stylus,ejs,json,xml,yml,md,yaml}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+[*.{md}]
+insert_final_newline = true

@@ -1,0 +1,40 @@
+{
+  "name": "mango2",
+  "version": "0.0.1",
+  "description": "前端开发脚手架",
+  "main": "index.js",
+  "repository": "https://github.com/bullub/mango2.git",
+  "author": "bullub <123572970@qq.com>",
+  "license": "Private",
+  "private": true,
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack --env=dev --display-error-details"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/plugin-transform-runtime": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/preset-stage-3": "^7.0.0-rc.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-rc.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2"
+  },
+  "browser": [
+    "iOS >= 7",
+    "Android >= 4.1"
+  ]
+}
