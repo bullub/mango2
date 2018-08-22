@@ -18,6 +18,7 @@
     "@babel/plugin-transform-runtime": "^7.0.0-rc.1",
     "@babel/preset-env": "^7.0.0-rc.1",
     "@babel/preset-stage-3": "^7.0.0-rc.1",
+    "@types/lodash-es": "^4.17.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.4.2",
     "babel-loader": "^8.0.0-beta",
@@ -28,12 +29,16 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "file-loader": "^2.0.0",
+    "glob": "^7.1.2",
+    "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-rc.1",
-    "lodash": "^4.17.10",
+    "lodash-es": "^4.17.10",
     "moment": "^2.22.2"
   },
   "browser": [

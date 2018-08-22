@@ -21,7 +21,7 @@ export function getAccessEnvironment() {
   }
 
   commandArgs.forEach((value) => {
-    if (value.startsWith('--env=')) {
+    if (value.startsWith('--access=')) {
       currentAccessEnvironment = value.split('=')[1];
       return false;
     }

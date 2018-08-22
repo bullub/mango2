@@ -1,6 +1,3 @@
-
-// import _ from 'lodash';
-
 import { getAccessEnvironment } from './builder/utils/environment';
 
 const accessEnvironment = getAccessEnvironment();

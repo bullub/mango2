@@ -11,4 +11,3 @@ consoleLog();
 export default {
   consoleLog
 }
-
