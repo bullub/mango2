@@ -77,16 +77,9 @@ export function findEntries() {
 
     const htmlWebpackPluginConf = {
       filename: `pages/${chunkName}.html`,
-      template: `pages/${chunkName}.ejs`,
-
+      template: `ejs-compiled-loader!src/pages/${chunkName}.ejs`,
       // 不用设置hash，因为在输出chunk的时候已经设置了4位的hash值
       // hash: true,
-      meta: {
-        viewport: 'width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no',
-        charset: {
-          charset: 'utf-8'
-        }
-      },
       inject: true, // true or body 为默认值
       // 包含已拆分的代码块
       includeSiblingChunks: true,

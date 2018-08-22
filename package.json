@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-rc.1",
+    "ejs-compiled-loader": "^1.1.0",
     "lodash-es": "^4.17.10",
     "moment": "^2.22.2"
   },
