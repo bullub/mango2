@@ -1,9 +1,10 @@
 import { resolve } from 'path';
 
 import CleanWebpackPlugin from "clean-webpack-plugin";
+
 import webpack from 'webpack';
 
-
+const devMode = process.env.NODE_ENV !== 'production'
 
 import { findEntries } from '../utils/entry-finder';
 
@@ -19,7 +20,7 @@ export default {
     // publicPath: '/'
   },
   resolve: {
-    extensions: ['*', '.js', '.json'],
+    extensions: ['*', '.js', '.json', '.css'],
     alias: {
       // 页面开始的地方
       pages: resolve(__dirname, '../../src/pages'),
@@ -40,6 +41,35 @@ export default {
             loader: 'babel-loader'
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'file-loader', options: { name: "[path][name].[hash:8].[ext]", } },
+          'extract-loader',
+          { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.(ejs|html)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: "[path][name].html",
+            }
+          },
+          'extract-loader',
+          {
+            loader: 'html-loader',
+            options: {
+              attrs: ["img:src", "link:href"],
+              interpolate: true,
+            }
+          },
+          // 'ejs-html-loader'
+        ]
       }
     ]
   },
@@ -48,17 +78,17 @@ export default {
     // 无论 mode 值是什么始终保持文件名
     // occurrenceOrder: true,
     // 代码拆分,目前HtmlWebpackPlugin不支持，暂不开启
-   /*  splitChunks: {
-      maxSize: 20480,
-      cacheGroups: {
-        default: false,
-        commons: {
-          name: 'commons',
-          chunks: 'all',
-          minChunks: 2
-        }
-      }
-    } */
+    /*  splitChunks: {
+       maxSize: 20480,
+       cacheGroups: {
+         default: false,
+         commons: {
+           name: 'commons',
+           chunks: 'all',
+           minChunks: 2
+         }
+       }
+     } */
   },
   plugins: [
     new CleanWebpackPlugin('dist/**', {
@@ -67,6 +97,5 @@ export default {
       dry: false
     }),
     ...htmlWebpackPlugins
-    // new webpack.HashedModuleIdsPlugin()
   ]
 };
