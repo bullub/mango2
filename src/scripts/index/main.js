@@ -1,8 +1,9 @@
 import config from 'config';
+import test from 'assets/css/test';
 
 
 function consoleLog() {
-  console.log(config);
+  console.log(config, test);
 }
 
 consoleLog();
