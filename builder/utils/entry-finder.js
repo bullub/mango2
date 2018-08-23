@@ -77,7 +77,7 @@ export function findEntries() {
 
     const htmlWebpackPluginConf = {
       filename: `pages/${chunkName}.html`,
-      template: `ejs-compiled-loader!src/pages/${chunkName}.ejs`,
+      template: `html-loader!src/pages/${chunkName}.html`,
       // 不用设置hash，因为在输出chunk的时候已经设置了4位的hash值
       // hash: true,
       inject: true, // true or body 为默认值

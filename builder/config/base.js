@@ -1,4 +1,6 @@
-import { resolve } from 'path';
+import {
+  resolve
+} from 'path';
 
 import CleanWebpackPlugin from "clean-webpack-plugin";
 
@@ -6,69 +8,83 @@ import webpack from 'webpack';
 
 const devMode = process.env.NODE_ENV !== 'production'
 
-import { findEntries } from '../utils/entry-finder';
+import {
+  findEntries
+} from '../utils/entry-finder';
 
-const { entries, htmlWebpackPlugins } = findEntries();
+const {
+  entries,
+  htmlWebpackPlugins
+} = findEntries();
 
 export default {
-  context: resolve(__dirname, '../../src'),
+  context: resolve('src'),
   entry: entries,
   output: {
-    path: resolve(__dirname, '../../dist'),
+    path: resolve('dist'),
     filename: 'scripts/[name].[contenthash:8].js',
     // public path会影响打包时一些插件生成的引用路径的拼接方式，不配默认使用相对路径
     // publicPath: '/'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.css'],
+    extensions: ['*', '.js', '.json', '.css', '.tpl'],
     alias: {
       // 页面开始的地方
-      pages: resolve(__dirname, '../../src/pages'),
+      pages: resolve('src/pages'),
       // 页面引用的脚本入口
-      scripts: resolve(__dirname, '../../src/scripts'),
+      scripts: resolve('src/scripts'),
       // 公共资源的位置
-      assets: resolve(__dirname, '../../src/assets')
+      // assets: resolve('src/assets')
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
         sideEffects: true,
-        use: [
-          {
-            loader: 'babel-loader'
-          }
-        ]
+        use: [{
+          loader: 'babel-loader'
+        }]
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'file-loader', options: { name: "[path][name].[hash:8].[ext]", } },
-          'extract-loader',
-          { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
+        use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[hash:8].css'
+            }
+          },
+          {
+            loader: 'extract-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1
+            }
+          },
           'postcss-loader'
         ]
       },
       {
-        test: /\.(ejs|html)$/,
+        test: /\.html$/,
         use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: "[path][name].html",
-            }
-          },
           'extract-loader',
           {
             loader: 'html-loader',
             options: {
-              attrs: ["img:src", "link:href"],
-              interpolate: true,
+              root: resolve('src'),
+              attrs: ['img:src', 'link:href'],
+              interpolate: 'require.!./file.tpl'
             }
-          },
-          // 'ejs-html-loader'
+          }
+        ]
+      },
+      {
+        test: /\.tpl$/,
+        use: [
+          'raw-loader'
         ]
       }
     ]
@@ -92,7 +108,7 @@ export default {
   },
   plugins: [
     new CleanWebpackPlugin('dist/**', {
-      root: resolve(__dirname, '../..'),
+      root: resolve('.'),
       verbose: true,
       dry: false
     }),

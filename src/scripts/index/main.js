@@ -1,5 +1,5 @@
 import config from 'config';
-import test from 'assets/css/test';
+import test from '../../assets/css/test';
 
 
 function consoleLog() {
