@@ -3,10 +3,9 @@ import {
 } from 'path';
 
 import CleanWebpackPlugin from "clean-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import webpack from 'webpack';
-
-const devMode = process.env.NODE_ENV !== 'production'
 
 import {
   findEntries
@@ -39,54 +38,57 @@ export default {
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        sideEffects: true,
-        use: [{
-          loader: 'babel-loader'
-        }]
-      },
-      {
-        test: /\.css$/,
-        use: [{
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[hash:8].css'
-            }
-          },
-          {
-            loader: 'extract-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1
-            }
-          },
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.html$/,
-        use: [
-          'extract-loader',
-          {
-            loader: 'html-loader',
-            options: {
-              root: resolve('src'),
-              attrs: ['img:src', 'link:href'],
-              interpolate: 'require.!./file.tpl'
+      test: /\.js$/,
+      exclude: /node_modules/,
+      sideEffects: true,
+      use: [{
+        loader: 'babel-loader'
+      }]
+    },
+    {
+      test: /\.css$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // you can specify a publicPath here
+            // by default it use publicPath in webpackOptions.output
+            publicPath: 'assets/css'
+          }
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1,
+            getLocalIdent: (context, localIdentName, localName, options) => {
+              return localName;
             }
           }
-        ]
-      },
-      {
-        test: /\.tpl$/,
-        use: [
-          'raw-loader'
-        ]
-      }
+        },
+        'postcss-loader'
+      ]
+    },
+    {
+      test: /\.html$/,
+      use: [
+        'extract-loader',
+        {
+          loader: 'html-loader',
+          options: {
+            root: resolve('src'),
+            attrs: ['img:src', 'link:href'],
+            interpolate: true
+          }
+        }
+      ]
+    },
+    {
+      test: /\.tpl$/,
+      use: [
+        'raw-loader'
+      ]
+    }
     ]
   },
   optimization: {
@@ -94,7 +96,7 @@ export default {
     // 无论 mode 值是什么始终保持文件名
     // occurrenceOrder: true,
     // 代码拆分,目前HtmlWebpackPlugin不支持，暂不开启
-    /*  splitChunks: {
+     splitChunks: {
        maxSize: 20480,
        cacheGroups: {
          default: false,
@@ -104,7 +106,7 @@ export default {
            minChunks: 2
          }
        }
-     } */
+     }
   },
   plugins: [
     new CleanWebpackPlugin('dist/**', {
@@ -112,6 +114,15 @@ export default {
       verbose: true,
       dry: false
     }),
-    ...htmlWebpackPlugins
+    ...htmlWebpackPlugins,
+    new MiniCssExtractPlugin(
+      {
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: "[name].css",
+        chunkFilename: "[id].css",
+        hot: true // optional as the plugin cannot automatically detect if you are using HOT, not for production use
+      }
+    ),
   ]
 };

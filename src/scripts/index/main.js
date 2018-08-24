@@ -1,9 +1,9 @@
 import config from 'config';
-import test from '../../assets/css/test';
+require('../../assets/css/test');
 
 
 function consoleLog() {
-  console.log(config, test);
+  console.log(config);
 }
 
 consoleLog();

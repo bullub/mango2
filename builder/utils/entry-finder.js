@@ -104,7 +104,7 @@ export function findEntries() {
 
 
     }
-    htmlWebpackPluginConf.chunksSortMode = 'dependency';
+    htmlWebpackPluginConf.chunksSortMode = 'manual';
 
     htmlWebpackPlugins.push(new HtmlWebpackPlugin(htmlWebpackPluginConf));
 
