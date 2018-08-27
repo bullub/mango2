@@ -5,58 +5,6 @@ import { resolve } from 'path';
 
 import { getAccessEnvironment, ACCESS_ENV_DEV, ACCESS_ENV_STG } from './environment';
 
-// module.exports = (mode) => {
-//   const entries = {};
-//   const chunks = [];
-//   const htmlWebpackPluginArray = [];
-//   const resPath = './src';
-//   // @todo main js file shouldn't be limited
-//   glob.sync(`${resPath}/pages/**/app.js`).forEach(path => {
-//     const chunk = path.split(`${resPath}/pages/`)[1].split('/app.js')[0];
-//     entries[chunk] = path;
-//     chunks.push(chunk);
-
-//     const filename = chunk + '.html';
-//     let htmlConf = {
-//       filename: filename,
-//       template: path.replace(/.js/g, '.html'),
-//       // inject: 'body', // true or body 为默认值
-//       favicon: `${resPath}/assets/img/favicon.ico`,
-//       meta: {
-//         viewport: 'width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no',
-//         charset: {
-//           charset: 'utf-8'
-//         }
-//       },
-//       chunks: ['vendors', 'commons', chunk]
-//     };
-
-//     if (mode === 'production') {
-//       htmlConf = {
-//         ...htmlConf,
-//         hash: true,
-//         minify: {
-//           removeComments: true,
-//           collapseWhitespace: true,
-//           removeAttributeQuotes: true
-//           // more options:
-//           // https://github.com/kangax/html-minifier#options-quick-reference
-//         },
-//         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-//         chunksSortMode: 'dependency'
-//       };
-//     }
-
-//     htmlWebpackPluginArray.push(new HtmlWebpackPlugin(htmlConf))
-//   });
-//   return {
-//     entries,
-//     htmlWebpackPluginArray
-//   };
-// };
-
-
-
 /**
  * 入口查找工具，构建动态入口
  */
@@ -75,15 +23,21 @@ export function findEntries() {
     // 创建一个命名chunk
     entries[chunkName] = path;
 
+
+
     const htmlWebpackPluginConf = {
       filename: `pages/${chunkName}.html`,
-      template: `html-loader!src/pages/${chunkName}.html`,
+      template: `pages/${chunkName}.html`,
+      appropriate: true,
       // 不用设置hash，因为在输出chunk的时候已经设置了4位的hash值
-      // hash: true,
+      hash: true,
       inject: true, // true or body 为默认值
       // 包含已拆分的代码块
       includeSiblingChunks: true,
-      chunks: [chunkName]
+      chunks: [chunkName],
+      minify: {
+        minifyURLs: true
+      }
     };
 
     const accessEnv = getAccessEnvironment();
