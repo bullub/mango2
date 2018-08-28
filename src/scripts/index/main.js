@@ -1,5 +1,6 @@
 import config from 'config';
 require('../../assets/css/test');
+import('./index.css');
 
 
 function consoleLog() {

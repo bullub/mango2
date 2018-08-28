@@ -8,9 +8,7 @@ import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 
 import webpack from 'webpack';
 
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-
-import RelativeAssetTagsPathPlugin from '../utils/RelativeAssetTagsPathPlugin'
+// import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import {
   findEntries
@@ -26,7 +24,7 @@ export default {
   entry: entries,
   output: {
     path: resolve('dist'),
-    filename: 'scripts/[name].[contenthash:8].js',
+    filename: './scripts/[name].[contenthash:8].js',
     // public path会影响打包时一些插件生成的引用路径的拼接方式，不配默认使用相对路径
     // publicPath: './'
   },
@@ -75,9 +73,27 @@ export default {
         ]
       },
       {
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            attrs: ['link:href', 'img:src'],
+            interpolate: true
+          }
+        }]
+      },
+      {
         test: /\.tpl$/,
         use: [
-          'raw-loader'
+          'raw-loader',
+          'extract-loader',
+          {
+            loader: 'html-loader',
+            options: {
+              attrs: ['link:href', 'img:src'],
+              interpolate: true
+            }
+          }
         ]
       },
       {
@@ -135,10 +151,12 @@ export default {
       chunkFilename: "/assets/css/[id].css",
       hot: true // optional as the plugin cannot automatically detect if you are using HOT, not for production use
     }),
-    new RelativeAssetTagsPathPlugin(),
-    new CopyWebpackPlugin([
-      {from: 'assets/**/*.+(png|gif|jpg|jpeg)', to: './'}
-    ], {debug: true})
+    // new CopyWebpackPlugin([{
+    //   from: '**/*.+(png|gif|jpg|jpeg)',
+    //   to: './'
+    // }], {
+    //   debug: true
+    // }),
     // new webpack.NamedModulesPlugin()
   ]
 };
