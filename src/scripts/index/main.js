@@ -8,7 +8,16 @@ function consoleLog() {
 
 consoleLog();
 
+class A {
+  a;
+  b;
+  constructor() {
 
+  }
+}
+
+window.A = A;
 export default {
-  consoleLog
+  consoleLog,
+  A
 }
