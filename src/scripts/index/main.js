@@ -1,6 +1,6 @@
 import config from 'config';
-require('../../assets/css/test');
-import('./index.css');
+require('../../assets/css/test.css');
+
 
 
 function consoleLog() {
@@ -13,7 +13,7 @@ class A {
   a;
   b;
   constructor() {
-
+    import ('./index.css');
   }
 }
 

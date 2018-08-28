@@ -1,3 +1,4 @@
 .title {
   background-attachment: fixed;
+  display: flex;
 }
