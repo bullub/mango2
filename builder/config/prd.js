@@ -20,7 +20,7 @@ baseConfig.module.rules.push({
     options: {
       limit: 5120,
       emitFile: true,
-      name: `[path][name].${watchMode ? '' : '.[hash:4]'}.[ext]`,
+      name: `[path][name]${watchMode ? '' : '.[hash:4]'}.[ext]`,
       publicPath: `//img.ydp.com/${packageJSON.name}/`,
       // outputPath: ''
     }
