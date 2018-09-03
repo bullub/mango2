@@ -7,21 +7,24 @@ module.exports = {
   "globals": {
     "CONFIG": true
   },
+  "extends": "eslint:recommended",
   "env": {
     "browser": true,
     "node": true,
     "commonjs": true,
     "amd": true,
   },
+  "parser": "babel-eslint",
   // JavaScript 语言选项
   "parserOptions": {
     // ECMAScript 版本
-    "ecmaVersion": 9,
+    "ecmaVersion": 2018,
     "sourceType": "module", // module
-    // "ecmaFeatures": {
-    //   // 打开一些实验性的功能的校验
-    //   "experimentalObjectRestSpread": true
-    // }
+    "ecmaFeatures": {
+      // 打开一些实验性的功能的校验
+      "experimentalObjectRestSpread": true,
+      "classes": true
+    }
   },
   /**
    * "off" 或 0 - 关闭规则
@@ -72,7 +75,7 @@ module.exports = {
     // 强制使用有效的 JSDoc 注释
     "valid-jsdoc": [1, { "requireReturn": true }],
     // 强制 typeof 表达式与有效的字符串进行比较
-    // typeof foo === "undefimed" 错误
+    // typeof foo === "undefined" 错误
     "valid-typeof": 2,
     // 禁止对关系运算符的左操作数使用否定操作符
     "no-unsafe-negation": 2,
@@ -134,7 +137,7 @@ module.exports = {
     // 禁止在非赋值或条件语句中使用 new 操作符
     "no-new": 0,
     // 不允许对 function 的参数进行重新赋值
-    "no-param-reassign": [1, { "props": true }],
+    "no-param-reassign": [1, { "props": false }],
     // 禁止使用 var 多次声明同一变量
     "no-redeclare": 2,
     // 禁止自我赋值

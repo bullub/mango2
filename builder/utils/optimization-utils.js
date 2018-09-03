@@ -2,15 +2,14 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 
-import {
-  isWatchMode
-} from './environment';
+import { isWatchMode } from './environment';
 
 export default addOptimization;
 
 /**
  * 增加优化配置，该配置仅在非watch模式下生效，包括图片压缩、css压缩合并、js压缩合并和拆分
  * @param {Object} webpackConfig webpack基础配置信息
+ * @returns {Object} 添加了优化选项的webpack配置
  */
 function addOptimization(webpackConfig) {
 

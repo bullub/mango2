@@ -1,6 +1,5 @@
 import config from 'config';
 
-
 function consoleLog() {
   console.log(config);
 }

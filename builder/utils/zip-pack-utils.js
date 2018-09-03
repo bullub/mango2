@@ -2,10 +2,7 @@ import FileManagerPlugin from 'filemanager-webpack-plugin';
 
 import moment from 'moment';
 
-import {
-  getAccessEnvironment,
-  isWatchMode
-} from './environment';
+import { getAccessEnvironment, isWatchMode } from './environment';
 
 const packageJSON = require('../../package.json');
 
@@ -14,7 +11,7 @@ export default appendZipPackConfig;
 
 function appendZipPackConfig(webpackConfig) {
 
-  if(isWatchMode()) {
+  if (isWatchMode()) {
     return webpackConfig;
   }
 

@@ -1,4 +1,5 @@
 import config from 'config';
+
 require('../../assets/css/test.css');
 
 
@@ -12,6 +13,7 @@ consoleLog();
 class A {
   a;
   b;
+
   constructor() {
     import ('./index.css');
   }

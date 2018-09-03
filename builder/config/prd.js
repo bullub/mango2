@@ -4,9 +4,7 @@ import { resolve } from 'path';
 import baseConfig from './base';
 
 import zipPackUtils from '../utils/zip-pack-utils';
-import {
-  isWatchMode
-} from "../utils/environment";
+import { isWatchMode } from "../utils/environment";
 
 const watchMode = isWatchMode();
 // 给当前配置增加打包zip的部分

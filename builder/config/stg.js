@@ -4,10 +4,7 @@ import { resolve } from 'path';
 import baseConfig from './base';
 
 import zipPackUtils from '../utils/zip-pack-utils'
-import {
-  isWatchMode,
-  isDevServeMode
-} from "../utils/environment";
+import { isWatchMode, isDevServeMode } from "../utils/environment";
 
 import packageJSON from '../../package.json';
 

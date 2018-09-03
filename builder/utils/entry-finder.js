@@ -7,6 +7,7 @@ import { isWatchMode } from './environment';
 
 /**
  * 入口查找工具，构建动态入口
+ * @returns {Object} 入口和入口对应的html-webpack-plugin插件实例
  */
 export function findEntries() {
 

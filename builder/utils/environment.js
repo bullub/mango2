@@ -40,6 +40,7 @@ export function getAccessEnvironment() {
 
 /**
  * 检查是否是通过watch的方式开启打包的
+ * @returns {Boolean} 是否是通过watch模式打开的
  */
 export function isWatchMode() {
   let watchMode = false;
@@ -55,6 +56,7 @@ export function isWatchMode() {
 
 /**
  * 是否是通过webpack-dev-server启动的
+ * @returns {Boolean} 是否是通过webpack-dev-server打开的
  */
 export function isDevServeMode() {
   let watchMode = false;

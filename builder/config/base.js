@@ -1,6 +1,4 @@
-import {
-  resolve
-} from 'path';
+import { resolve } from 'path';
 
 import CleanWebpackPlugin from "clean-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -8,20 +6,13 @@ import addOptimization from '../utils/optimization-utils';
 
 import webpack from 'webpack';
 
-import {
-  isWatchMode
-} from "../utils/environment";
+import { isWatchMode } from "../utils/environment";
 
-import {
-  findEntries
-} from '../utils/entry-finder';
+import { findEntries } from '../utils/entry-finder';
 
 import packageJSON from '../../package.json';
 
-const {
-  entries,
-  htmlWebpackPlugins
-} = findEntries();
+const { entries, htmlWebpackPlugins } = findEntries();
 
 const watchMode = isWatchMode();
 
@@ -81,64 +72,62 @@ const webpackConfig = {
   module: {
     // js打包配置
     rules: [{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        sideEffects: true,
-        use: [{
-          loader: 'babel-loader'
-        }]
-      },
-      // css打包配置
-      {
-        test: /\.css$/,
-        use: [
-          watchMode ? 'style-loader' : {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
-              // publicPath: './'
+      test: /\.js$/,
+      exclude: /node_modules/,
+      sideEffects: true,
+      use: ['babel-loader', 'eslint-loader']
+    },
+    // css打包配置
+    {
+      test: /\.css$/,
+      use: [
+        watchMode ? 'style-loader' : {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // you can specify a publicPath here
+            // by default it use publicPath in webpackOptions.output
+            // publicPath: './'
+          }
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1,
+            getLocalIdent: (context, localIdentName, localName, options) => {
+              return localName;
             }
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              getLocalIdent: (context, localIdentName, localName, options) => {
-                return localName;
-              }
-            }
-          },
-          'postcss-loader'
-        ]
-      },
-      // html转换配置
-      {
-        test: /\.html$/,
-        use: [{
+          }
+        },
+        'postcss-loader'
+      ]
+    },
+    // html转换配置
+    {
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader',
+        options: {
+          attrs: ['link:href', 'img:src'],
+          interpolate: true
+        }
+      }]
+    },
+    // 模板转换配置
+    {
+      test: /\.(tpl|ejs)$/,
+      use: [
+        'raw-loader',
+        'extract-loader',
+        {
           loader: 'html-loader',
           options: {
             attrs: ['link:href', 'img:src'],
             interpolate: true
           }
-        }]
-      },
-      // 模板转换配置
-      {
-        test: /\.(tpl|ejs)$/,
-        use: [
-          'raw-loader',
-          'extract-loader',
-          {
-            loader: 'html-loader',
-            options: {
-              attrs: ['link:href', 'img:src'],
-              interpolate: true
-            }
-          }
-        ]
-      }
+        }
+      ]
+    }
     ]
   },
   devtool: 'source-map',
