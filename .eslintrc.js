@@ -23,7 +23,8 @@ module.exports = {
     "ecmaFeatures": {
       // 打开一些实验性的功能的校验
       "experimentalObjectRestSpread": true,
-      "classes": true
+      "classes": true,
+      "experimentalDecorators": true,
     }
   },
   /**
@@ -32,6 +33,7 @@ module.exports = {
    * "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
    */
   "rules": {
+    "no-debugger": 0,
     // 强制 getter 函数中出现 return 语句
     "getter-return": 2,
     // 禁止在正则表达式中使用控制字符

@@ -1,4 +1,5 @@
 import config from 'config';
+import { A } from './A';
 
 require('../../assets/css/test.css');
 
@@ -9,15 +10,6 @@ function consoleLog() {
 }
 
 consoleLog();
-
-class A {
-  a;
-  b;
-
-  constructor() {
-    import ('./index.css');
-  }
-}
 
 window.A = A;
 export default {
